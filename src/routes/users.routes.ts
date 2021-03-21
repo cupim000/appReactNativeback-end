@@ -53,4 +53,20 @@ userRouter.get('/', async (request, response) => {
   return response.status(201).json(noPasswordUsers);
 });
 
+userRouter.get('/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const userRepository = getRepository(User);
+    const user = await userRepository.findOne({ where: { id } });
+    if (!user) throw new Error("Users doesn't exists");
+
+    const noPasswordUser = user;
+    delete noPasswordUser.password;
+
+    return response.status(201).json(noPasswordUser);
+  } catch (err) {
+    return response.status(401).json({ error: err.message });
+  }
+});
+
 export default userRouter;
