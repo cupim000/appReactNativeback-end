@@ -40,4 +40,17 @@ userRouter.post('/', async (request, response) => {
   }
 });
 
+userRouter.get('/', async (request, response) => {
+  const userRepository = getRepository(User);
+  const users = await userRepository.find();
+
+  const noPasswordUsers = users.map(user => {
+    const newUser = user;
+    delete newUser.password;
+    return newUser;
+  });
+
+  return response.status(201).json(noPasswordUsers);
+});
+
 export default userRouter;
