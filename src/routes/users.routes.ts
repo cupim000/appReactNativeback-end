@@ -69,4 +69,21 @@ userRouter.get('/:id', async (request, response) => {
   }
 });
 
+userRouter.delete('/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    const userRepository = getRepository(User);
+
+    const userExists = await userRepository.findOne({ where: { id } });
+    if (!userExists) throw new Error("User doesn't exists");
+    userRepository.remove(userExists);
+    return response
+      .status(201)
+      .json({ message: `Client ${userExists.id} removed` });
+  } catch (err) {
+    return response.status(401).json({ error: err.message });
+  }
+});
+
 export default userRouter;
