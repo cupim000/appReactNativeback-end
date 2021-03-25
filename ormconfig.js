@@ -14,8 +14,8 @@ module.exports = {
   ],
   "entitiesDir": "src/models"
   },
-  "synchronize": false,
-  "logging": false,
+  // "synchronize": false,
+  // "logging": false,
   "extra": {
     "ssl": true,
   },
