@@ -14,7 +14,9 @@ module.exports = {
   ],
   "entitiesDir": "src/models"
   },
-  "ssl":"true"
+  "ssl": {
+    "ca": process.env.SSL_CERT,
+  },
 }
 
 
