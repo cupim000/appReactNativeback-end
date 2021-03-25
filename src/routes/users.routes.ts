@@ -80,7 +80,7 @@ userRouter.delete('/:id', async (request, response) => {
     userRepository.remove(userExists);
     return response
       .status(201)
-      .json({ message: `Client ${userExists.id} removed` });
+      .json({ message: `User ${userExists.id} removed` });
   } catch (err) {
     return response.status(401).json({ error: err.message });
   }
